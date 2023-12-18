@@ -1,0 +1,121 @@
+/* ! keep the colors in this style ! 32, 107, 196*/
+:root {
+    --main-color: 66, 153, 225;
+    --dark-color: 12, 41, 77;
+    --navigator-text-color: 66, 153, 225;
+    --navigator-background-color: 12, 41, 77;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: transparent;
+}
+
+.tablet {
+    width: 75%;
+    height: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #2e2e2e;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    color: #f0f0f0;
+    border-radius: 40px;
+    border: 15px solid rgb(19, 19, 19);
+    outline: 5px solid #898989;
+    box-sizing: border-box;
+    user-select: none;
+    cursor: default;
+}
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    background: #191B28;
+}
+
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+
+.roulette-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.selector {
+    width: 3px;
+    background: #2b7acc;
+    left: 50%;
+    height: 100%;
+    transform: translate(-50%, 0%);
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 0 17px 5px #00000057;
+}
+
+.wheel {
+    display: flex;
+}
+
+.rowCard {
+    display: flex;
+}
+
+.rouletteCard {
+    height: 10rem;
+    width: 10rem;
+    margin: 3px;
+    border-radius: 15px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5em;
+    border: 3px solid #ffffff4a;
+}
+
+.legendary {
+    background-color: #f5b942fd;
+    box-shadow: inset 0 0 40px 5px #7a4a0f;
+}
+
+.epic {
+    background-color: #c368dcfd;
+    box-shadow: inset 0 0 40px 5px #520966;
+}
+
+.rare {
+    background-color: #4a9dfdfd;
+    box-shadow: inset 0 0 40px 5px #0f4a2a;
+}
+
+.common {
+    background-color: #fffffffd;
+    box-shadow: inset 0 0 40px 5px #4a4a4a;
+}
+
+.modal-content {
+    background-color: #2e2e2e !important;
+    color: #f0f0f0 !important;
+}
+
+* {
+    box-sizing: border-box;
+}
