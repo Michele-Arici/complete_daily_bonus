@@ -141,17 +141,34 @@ const app = Vue.createApp({
             const numCopies = this.rouletteData.length * 2;
 
             const duplicatedData = [];
-            for (let i = 0; i < numCopies; i++) {
-                data.sort(() => Math.random() - 0.5);
-                duplicatedData.push(...data);
+
+            while (duplicatedData.length < numCopies * this.rouletteData.length) {
+                // generete an item randomly based on probability
+                const rand = Math.random();
+                let cumulativeProbability = 0;
+
+                for (const key in this.probability) {
+                    cumulativeProbability += this.probability[key];
+                    if (rand <= cumulativeProbability) {
+                        const rarity = key;
+                        const items = data.filter(item => item.rarity === rarity);
+                        const selectedItem = items[Math.floor(Math.random() * items.length)];
+                        duplicatedData.push(selectedItem);
+                        break;
+                    }
+                }
             }
 
+            duplicatedData.sort(() => Math.random() - 0.5);
+            console.log(duplicatedData.length);
             data = duplicatedData;
             this.duplicatedData = duplicatedData;
 
             const roulette = document.getElementById("rouletteItems");
             const itemsPerRow = this.rouletteData.length; // Numero di elementi per riga
 
+            var firstIds = [];
+            var lastIds = [];
             for (let i = 0; i < data.length; i += itemsPerRow) {
                 const row = document.createElement("div");
                 row.classList.add("rowCard");
@@ -163,16 +180,19 @@ const app = Vue.createApp({
                     const itemDiv = this.createItemCard(item);
                     if (i == itemsPerRow) {
                         itemDiv.dataset.id = `${item.id}_first`;
-                    } else if (i == data.length - itemsPerRow * 2) {
+                        firstIds.push(item.id);
+                    } else if (i == data.length - itemsPerRow * 2 && !lastIds.includes(item.id)) {
                         itemDiv.dataset.id = `${item.id}_last`;
+                        lastIds.push(item.id);
                     }
                     row.appendChild(itemDiv);
                 });
                 roulette.appendChild(row);
             }
 
-            const selectedItemId = Math.floor(Math.random() * this.rouletteData.length);
+            const selectedItemId = firstIds[Math.floor(Math.random() * firstIds.length)];
             const selectedElement = roulette.querySelector(`[data-id="${selectedItemId}_first"]`);
+            console.log(selectedItemId, selectedElement);
             const rouletteRect = roulette.getBoundingClientRect();
             const selectedRect = selectedElement.getBoundingClientRect();
 
@@ -187,6 +207,7 @@ const app = Vue.createApp({
             return transformMatrix.m41;
         },
         spinRoulette() {
+            /*
             var selectedItem = null;
             var rarity = null;
 
@@ -207,7 +228,10 @@ const app = Vue.createApp({
             var items = data.filter(item => item.rarity === rarity);
             selectedItem = items[Math.floor(Math.random() * items.length)];
             const selectedItemId = selectedItem.id;
-            
+            */
+
+            const selectedItemId = Math.floor(Math.random() * this.rouletteData.length);
+            const selectedItem = this.rouletteData[selectedItemId];
             this.animateRoulette(selectedItem, selectedItemId);
         },
         animateRoulette(selectedItem, selectedItemId) {
@@ -237,6 +261,7 @@ const app = Vue.createApp({
                     const items = document.getElementById("rouletteItems");
                     items.style.transform = 'none';
 
+                    /*
                     // delete all items except ${selectedItemId}_last
                     const allItems = document.querySelectorAll(".rouletteCard");
                     allItems.forEach(item => {
@@ -266,6 +291,43 @@ const app = Vue.createApp({
                     h3.style.lineHeight = "1.2";
                     h3.innerText = selectedItem.name;
                     winItem.appendChild(h3);
+                    */
+
+                    // create item card and add it to modalBody
+                    const itemCard = document.createElement("div");
+                    itemCard.classList.add("rouletteCard");
+                    itemCard.classList.add(selectedItem.rarity);
+                    itemCard.style.backgroundImage = `url(${selectedItem.img})`;
+                    itemCard.style.backgroundSize = "contain";
+                    itemCard.style.backgroundPosition = "center";
+                    itemCard.style.backgroundRepeat = "no-repeat";
+                    itemCard.alt = selectedItem.name;
+                    itemCard.style.height = "10rem";
+                    itemCard.style.width = "10rem";
+                    itemCard.style.display = "flex";
+                    itemCard.style.alignItems = "center";
+                    itemCard.style.justifyContent = "center";
+                    itemCard.style.position = "relative";
+                    itemCard.style.boxShadow = "inset 0px -57px 73px -28px rgb(0 0 0 / 86%)";
+
+                    const h3 = document.createElement("h3");
+                    h3.classList.add("text-center");
+                    h3.classList.add("text-white");
+                    h3.classList.add("text-shadow");
+                    h3.classList.add("text-uppercase");
+                    h3.style.position = "absolute";
+                    h3.style.marginBottom = "0.5rem";
+                    h3.style.fontWeight = "800";
+                    h3.style.lineHeight = "1.2";
+                    h3.innerText = selectedItem.name;
+                    itemCard.appendChild(h3);
+
+                    const modalBody = document.getElementById("modalBody");
+                    modalBody.innerHTML = "";
+                    modalBody.appendChild(itemCard);
+
+                    // opne rewar-modal
+                    $("#reward-modal").modal("show");
                     
 
                     document.getElementById("spinButton").classList.remove("disabled");
