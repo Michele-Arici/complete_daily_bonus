@@ -4,75 +4,36 @@ const app = Vue.createApp({
     data() {
         return {
             displayUi: false,
-            rouletteData: [
-                {
-                    id: 0,
-                    rarity: "legendary",
-                    img: '/html/img/merc.png',
-                    name: "Mercedes G63 AMG"
-                },
-                {
-                    id: 1,
-                    rarity: "epic",
-                    img: '/html/img/supreme.webp',
-                    name: "Supreme Backpack"
-                },
-                {
-                    id: 2,
-                    rarity: "rare",
-                    img: '/html/img/knife.png',
-                    name: "Knife"
-                },
-                {
-                    id: 3,
-                    rarity: "rare",
-                    img: '/html/img/carplay.png',
-                    name: "Carplay"
-                },
-                {
-                    id: 4,
-                    rarity: "common",
-                    img: '/html/img/merc.png',
-                    name: "Gucci Backpack"
-                },
-                {
-                    id: 5,
-                    rarity: "common",
-                    img: '/html/img/cola.png',
-                    name: "Coca Cola"
-                },
-                {
-                    id: 6,
-                    rarity: "common",
-                    img: '/html/img/cash.png',
-                    name: "$1000 cash"
-                },
-                {
-                    id: 7,
-                    rarity: "common",
-                    img: '/html/img/iphone.webp',
-                    name: "Iphone"
-                },
-            ],
+            rouletteData: [],
             duplicatedData: [],
             firstElement: 0,
-            probability: {
-                legendary: 0.001,
-                epic: 0.01,
-                rare: 0.20,
-                common: 0.789,
-            }
+            probability: {}
         };
     },
     mounted() {
         this.listener = window.addEventListener("message", (event) => {
-            if (event.data.type === "hud_settings") {
-                
+            if (event.data.type === "dailyBonus") {
+                if (event.data.action === "initialize") {
+                    console.log("initialize");
+                    this.probability = event.data.probability;
+                    this.rouletteData = JSON.parse(event.data.rouletteData);
+                    this.initializeDisplayItems();
+                    this.initializeRoulette();
+                } else if (event.data.action === "open") {
+                    this.displayUi = true;
+                } else if (event.data.action === "close") {
+                    this.displayUi = false;
+                } else if (event.data.action === "setData") {
+                    eval(`this.${event.data.setting} = "${event.data.value}"`);
+                }
             }
         });
 
-        this.initializeDisplayItems();
-        this.initializeRoulette();
+        window.addEventListener("keyup", (event) => {
+            if (event.key === "Escape") {
+                this.closeSettings();
+            }
+        });
     },
     methods: {
         openSettings() {
@@ -82,12 +43,9 @@ const app = Vue.createApp({
             $("#settings-modal").modal("hide");
             $.post('https://complete_hud/closeSettings');
         },
-        createDisplayItem(item) {
-            
-        },
         initializeDisplayItems() {
             var display = document.getElementById("displayItems");
-            
+
             this.rouletteData.forEach((item) => {
                 const colDiv = document.createElement("div");
                 colDiv.classList.add("col");
@@ -103,7 +61,7 @@ const app = Vue.createApp({
                 itemDiv.style.alignItems = "flex-end";
                 itemDiv.style.position = "relative";
                 itemDiv.style.justifyContent = "center";
-                itemDiv.style.boxShadow = "inset 0px -57px 73px -28px rgb(0 0 0 / 86%)";
+                itemDiv.style.boxShadow = "inset 0px -57px 73px -28px rgb(0 0 0 / 85%)";
 
                 const h3 = document.createElement("h3");
                 h3.classList.add("text-center");
@@ -148,13 +106,12 @@ const app = Vue.createApp({
             this.duplicatedData = duplicatedData;
 
             const roulette = document.getElementById("rouletteItems");
-            const itemsPerRow = this.rouletteData.length; // Numero di elementi per riga
+            const itemsPerRow = this.rouletteData.length;
 
             for (let i = 0; i < data.length; i += itemsPerRow) {
                 const row = document.createElement("div");
                 row.classList.add("rowCard");
 
-                // Prendi un sottoinsieme di elementi per la riga corrente
                 const rowItems = data.slice(i, i + itemsPerRow);
 
                 rowItems.forEach((item) => {

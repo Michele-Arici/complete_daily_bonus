@@ -21,41 +21,43 @@
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
 </head>
 
-<body id="main_body" class="antialiased" style="overflow-x: hidden; overflow-y: hidden;">
-    <div class="tablet" id="app">
-        <div class="page">
-            <div class="page-header">
-                <div class="d-flex align-items-center justify-content-center">
-                    <img height="150px" src="/html/img/logo.png">
+<body class="antialiased" style="overflow-x: hidden; overflow-y: hidden; background-color: transparent;">
+    <div id="app">
+        <div v-show="displayUi" class="tablet">
+            <div class="page">
+                <div class="page-header">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img height="150px" src="/html/img/logo.png">
+                    </div>
                 </div>
-            </div>
-
-            <div class="page-wrapper">
-                <div class="page-body">
-                    <div class="section">
-                        <div class='roulette-wrapper'>
-                            <div class='selector'></div>
-                            <div class='wheel' id="rouletteItems">
+    
+                <div class="page-wrapper">
+                    <div class="page-body">
+                        <div class="section">
+                            <div class='roulette-wrapper'>
+                                <div class='selector'></div>
+                                <div class='wheel' id="rouletteItems">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 mb-4 text-center">
+                            <div class="d-flex justify-content-center">
+                                <a href="#" @click="spinRoulette" class="btn btn-primary btn-lg mb-2 w-25" style="font-weight: 800; background-image: linear-gradient(45deg, #2f32ff 0%, #199bf0  51%, #2fe1ff  100%); border: none !important;" id="spinButton">SPIN</a>
+                            </div>
+                            <span>Once every 24 hours</span>
+                        </div>
+                        <div class="container-xl">
+                            <div class="row g-2 align-items-center mb-3">
+                                <div class="col">
+                                    <h2 class="page-title" style="font-weight: 700;">
+                                        Prize list
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="row row-cols-6 g-3" id="displayItems">
                                 
                             </div>
-                        </div>
-                    </div>
-                    <div class="p-4 mb-4 text-center">
-                        <div class="d-flex justify-content-center">
-                            <a href="#" @click="spinRoulette" class="btn btn-primary btn-lg mb-2 w-25" style="font-weight: 800; background-image: linear-gradient(45deg, #2f32ff 0%, #199bf0  51%, #2fe1ff  100%); border: none !important;" id="spinButton">SPIN</a>
-                        </div>
-                        <span>Once every 24 hours</span>
-                    </div>
-                    <div class="container-xl">
-                        <div class="row g-2 align-items-center mb-3">
-                            <div class="col">
-                                <h2 class="page-title" style="font-weight: 700;">
-                                    Prize list
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row row-cols-6 g-3" id="displayItems">
-                            
                         </div>
                     </div>
                 </div>

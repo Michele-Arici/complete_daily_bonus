@@ -11,7 +11,7 @@ files {
 	'html/jquery-3.4.1.min.js',
     'html/img/*.png',
     'html/img/*.jpg',
-    'html/img/weather/*.png',
+    'html/img/*.webp',
 }
 
 client_scripts{
@@ -20,7 +20,6 @@ client_scripts{
 }
 
 server_scripts{
-    '@mysql-async/lib/MySQL.lua',
     'config.lua',
     'server/server.lua',
 }
