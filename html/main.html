@@ -24,7 +24,7 @@
 <body class="antialiased" style="overflow-x: hidden; overflow-y: hidden; background-color: transparent;">
     <div id="app">
         <div v-show="displayUi" class="tablet">
-            <div class="page">
+            <div class="page" id="">
                 <div class="page-header">
                     <div class="d-flex align-items-center justify-content-center">
                         <img height="150px" src="/html/img/logo.png">
@@ -45,7 +45,7 @@
                             <div class="d-flex justify-content-center">
                                 <a href="#" @click="spinRoulette" class="btn btn-primary btn-lg mb-2 w-25" style="font-weight: 800; background-image: linear-gradient(45deg, #2f32ff 0%, #199bf0  51%, #2fe1ff  100%); border: none !important;" id="spinButton">SPIN</a>
                             </div>
-                            <span>Once every 24 hours</span>
+                            <span style="color: rgb(132, 132, 132)">Once every 24 hours</span>
                         </div>
                         <div class="container-xl">
                             <div class="row g-2 align-items-center mb-3">
@@ -62,21 +62,22 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal modal-blur fade" id="reward-modal" tabindex="-1" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered d-flex justify-content-center" role="document">
-                <div class="modal-content d-flex justify-content-center" style="background-color: transparent !important; width: fit-content;" >
-                    <div class="modal-body d-flex justify-content-center" id="modalBody">
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Sell for 50$</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Collect</button>
+            <div class="modal modal-blur fade" id="reward-modal" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered d-flex justify-content-center" role="document">
+                    <div class="modal-content d-flex justify-content-center" style="background-color: transparent !important; width: fit-content;">
+                        <div class="modal-body d-flex justify-content-center flex-direction-column" id="modalBody" style="flex-direction: column;align-items: center;">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger text-uppercase" data-bs-dismiss="modal" style="font-size: 1.3rem; font-weight: 700; background-color: rgb(155 155 155 / 75%); border-radius: 10px; box-shadow: rgb(0 0 0 / 30%) 0px -13px 17px 0px inset; border: none; padding: .7375rem 1rem !important; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">Sell for 50$</button>
+                            <button type="button" class="btn btn-primary text-uppercase" data-bs-dismiss="modal" style="font-size: 1.3rem; font-weight: 700; border-radius: 10px; background-color: rgb(0 63 205); box-shadow: rgb(0 0 0 / 30%) 0px -13px 18px 0px inset; border: none; padding: .7375rem 1rem !important; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">Collect</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 
