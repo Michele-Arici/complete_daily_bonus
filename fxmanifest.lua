@@ -22,6 +22,7 @@ client_scripts{
 server_scripts{
     'config.lua',
     'server/server.lua',
+    '@mysql-async/lib/MySQL.lua',
 }
 
 escrow_ignore {

@@ -1,98 +1,154 @@
 Config = {}
 
 -- === VERSION 1.0 ===
-Config.OpenCommand  = 'daily-bonus' -- Command to open the menu
-Config.TimeToClaim  = 86400        -- Time in seconds to claim the reward, 86400 = 24 hours
-Config.RouletteTime = 9           -- Time in seconds to spin the roulette, 9 recommended
+Config.OpenCommand          = 'daily-bonus'         -- Command to open the menu
+Config.TimeToClaim          = {
+    hours = 0,                                      -- Hours to claim the reward
+    minutes = 0,                                    -- Minutes to claim the reward
+    seconds = 30,                                    -- Seconds to claim the reward
+}
+Config.AnimationDuration    = 12                    -- Time in seconds to spin the roulette, more the items more time is reccomended
+Config.SellType             = "bank"                -- Type of reward to sell, cash or bank
+Config.WeaponAmmo           = 100                   -- Ammo to give with the weapon
+Config.CarParkingSpawn      = "SanAndreasAvenue"    -- Garage to spawn the car (SanAndreasAvenue name not working with QBCorem, check your garage script config)
 
+
+-- type: vehicle, item, cash, bank, weapon
 Config.RouletteData = {
     [0] = {
-        data = {
-            id = 0,
-            rarity = "legendary",
-            img = '/html/img/merc.png',
-            name = "Mercedes G63 AMG",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 0,
+        type = "vehicle",
+        model = "bmci",
+        rarity = "legendary",
+        img = '/html/img/m5-comp.png',
+        name = "BMW M5 F90 2018",
+        sell = 25000
     },
     [1] = {
-        data = {
-            id = 1,
-            rarity = "epic",
-            img = '/html/img/supreme.webp',
-            name = "Supreme Backpack",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 1,
+        type = "weapon",
+        model = "weapon_combatpistol",
+        rarity = "epic",
+        img = '/html/img/combat-pistol.png',
+        name = "Combat Pistol",
+        sell = 5000
     },
     [2] = {
-        data = {
-            id = 2,
-            rarity = "rare",
-            img = '/html/img/knife.png',
-            name = "Knife",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 2,
+        rarity = "rare",
+        type = "weapon",
+        model = "weapon_knuckle",
+        img = '/html/img/knuckles.webp',
+        name = "Knuckle Dusters",
+        sell = 500
     },
     [3] = {
-        data = {
-            id = 3,
-            rarity = "rare",
-            img = '/html/img/carplay.png',
-            name = "Carplay",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 3,
+        rarity = "rare",
+        type = "item",
+        model = "fixkit",
+        img = '/html/img/fix_kit.png',
+        name = "Car Fix Kit",
+        sell = 500
     },
     [4] = {
-        data = {
-            id = 4,
-            rarity = "common",
-            img = '/html/img/merc.png',
-            name = "Gucci Backpack",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 4,
+        rarity = "rare",
+        type = "bank",
+        model = 1000,
+        img = '/html/img/creditCard.png',
+        name = "$1000 Bank",
+        sell = 500
     },
     [5] = {
-        data = {
-            id = 5,
-            rarity = "common",
-            img = '/html/img/cola.png',
-            name = "Coca Cola",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 5,
+        rarity = "common",
+        type = "item",
+        model = "bandage",
+        img = '/html/img/bandage.png',
+        name = "Bandage",
+        sell = 50
     },
     [6] = {
-        data = {
-            id = 6,
-            rarity = "common",
-            img = '/html/img/cash.png',
-            name = "$1000 cash",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 6,
+        rarity = "common",
+        type = "item",
+        model = "cola",
+        img = '/html/img/cola.png',
+        name = "Coca Cola",
+        sell = 50
     },
     [7] = {
-        data = {
-            id = 7,
-            rarity = "common",
-            img = '/html/img/iphone.webp',
-            name = "Iphone",
-        },
-        reward = function ()
-            -- Give reward
-        end
+        id = 7,
+        rarity = "common",
+        type = "cash",
+        model = 100,
+        img = '/html/img/cash.png',
+        name = "$100 Cash",
+        sell = 50
+    },
+    [8] = {
+        id = 8,
+        rarity = "common",
+        type = "item",
+        model = "medikit",
+        img = '/html/img/medikit.png',
+        name = "Medikit",
+        sell = 50
+    },
+    [9] = {
+        id = 9,
+        rarity = "epic",
+        type = "vehicle",
+        model = "vespa",
+        img = '/html/img/vespa.webp',
+        name = "Piaggio Vespa 150cc",
+        sell = 7500
+    },
+    [10] = {
+        id = 10,
+        rarity = "legendary",
+        type = "weapon",
+        model = "weapon_shotgun",
+        img = '/html/img/shotgun.webp',
+        name = "Pump Shotgun",
+        sell = 7500
+    },
+    [11] = {
+        id = 11,
+        rarity = "epic",
+        type = "item",
+        model = "louisvuittonbag",
+        img = '/html/img/louis_vuitton.webp',
+        name = "Louis Vuitton Bag",
+        sell = 5000
+    },
+    [12] = {
+        id = 12,
+        rarity = "rare",
+        type = "item",
+        model = "bodyarmor",
+        img = '/html/img/armor.png',
+        name = "Body Armor",
+        sell = 500
+    },
+    [13] = {
+        id = 13,
+        rarity = "common",
+        type = "item",
+        model = "joint",
+        img = '/html/img/joint.png',
+        name = "Joint",
+        sell = 50
+    },
+    [14] = {
+        id = 14,
+        rarity = "common",
+        type = "item",
+        model = "chips",
+        img = '/html/img/chips.png',
+        name = "Chips",
+        sell = 50
     },
 }
 
@@ -106,9 +162,15 @@ Config.RarityProbability = {
 
 -- === TEXT ===
 Config.Text = {
-    ['no_phone'] = "You don't have a phone",
-    ['no_carplay'] = "Carplay is not installed in this vehicle",
-    ['not_owner'] = 'You are not the owner of this vehicle',
-    ['carplay_installed'] = "Installing carplay",
-    ['no_item'] = "You don't have the item"
+    ['initialized'] = "Daily bonus initialized",
+    ['item_sold'] = "You sold the item for $",
+    ['item_collected'] = "You collected the item"
 }
+
+Config.Notify = function(text, type)
+    -- ESX
+    ESX.ShowNotification(text, type, 3000)
+
+    -- QBCore
+    -- QBCore.Functions.Notify(text, type, 3000)
+end

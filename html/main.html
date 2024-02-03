@@ -11,23 +11,37 @@
 
     <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta3/dist/css/tabler.min.css">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
 </head>
 
-<body class="antialiased" style="overflow-x: hidden; overflow-y: hidden; background-color: transparent;">
+<body class="antialiased">
     <div id="app">
-        <div v-show="displayUi" class="tablet">
-            <div class="page" id="">
-                <div class="page-header">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img height="150px" src="/html/img/logo.png">
+        <div v-show="displayUi" class="tablet" id="tablet">
+            <div class="page">
+                <div class="page-header my-3">
+                    <div class="row align-items-center" style="padding-right: 2rem; padding-left: 2rem;">
+                        <div class="col-4 d-flex justify-content-start">
+                            <img height="60vh" src="/html/img/logo.png" style="display: block; height: 3rem; width: auto;">
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <h2 class="page-title text-uppercase" style="font-size: medium; font-weight: 700; letter-spacing: 0.04em; color: #ffffffda;">
+                                Daily Bonus
+                            </h2>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <div class="btn-list">
+                                <a href="#" @click="close" class="btn exit-button d-none d-sm-inline-block">
+                                    <i class="fa-solid fa-door-open" style="margin-right: 0.5rem;"></i>
+                                    Exit
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
     
@@ -43,9 +57,11 @@
                         </div>
                         <div class="p-4 mb-4 text-center">
                             <div class="d-flex justify-content-center">
-                                <a href="#" @click="spinRoulette" class="btn btn-primary btn-lg mb-2 w-25" style="font-weight: 800; background-image: linear-gradient(45deg, #2f32ff 0%, #199bf0  51%, #2fe1ff  100%); border: none !important;" id="spinButton">SPIN</a>
+                                <a v-if="canClaim" href="#" @click="spinRoulette" class="btn btn-primary spin-button btn-lg mb-2 w-25">SPIN</a>
+                                <a v-else-if="isSpinning" href="#" @click="spinRoulette" class="btn btn-primary btn-loading spin-button btn-lg mb-2 w-25 disabled">SPIN</a>
+                                <a v-else href="#" @click="spinRoulette" class="btn btn-primary spin-button btn-lg mb-2 w-25 disabled">{{lastClaimed}}</a>
                             </div>
-                            <span style="color: rgb(132, 132, 132)">Once every 24 hours</span>
+                            <span style="color: #bababac0">You can spin once every 24 hours</span>
                         </div>
                         <div class="container-xl">
                             <div class="row g-2 align-items-center mb-3">
@@ -62,15 +78,14 @@
                     </div>
                 </div>
             </div>
-            <div class="modal modal-blur fade" id="reward-modal" tabindex="-1" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered d-flex justify-content-center" role="document">
+            <div class="modal modal-blur fade" id="reward-modal" tabindex="-1" style="display: none;" data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered d-flex justify-content-center" role="document">
                     <div class="modal-content d-flex justify-content-center" style="background-color: transparent !important; width: fit-content;">
                         <div class="modal-body d-flex justify-content-center flex-direction-column" id="modalBody" style="flex-direction: column;align-items: center;">
                             
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger text-uppercase" data-bs-dismiss="modal" style="font-size: 1.3rem; font-weight: 700; background-color: rgb(155 155 155 / 75%); border-radius: 10px; box-shadow: rgb(0 0 0 / 30%) 0px -13px 17px 0px inset; border: none; padding: .7375rem 1rem !important; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">Sell for 50$</button>
-                            <button type="button" class="btn btn-primary text-uppercase" data-bs-dismiss="modal" style="font-size: 1.3rem; font-weight: 700; border-radius: 10px; background-color: rgb(0 63 205); box-shadow: rgb(0 0 0 / 30%) 0px -13px 18px 0px inset; border: none; padding: .7375rem 1rem !important; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">Collect</button>
+                        <div class="modal-footer" id="modalFooter">
+                            
                         </div>
                     </div>
                 </div>
