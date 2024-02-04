@@ -3,9 +3,9 @@ Config = {}
 -- === VERSION 1.0 ===
 Config.OpenCommand          = 'daily-bonus'         -- Command to open the menu
 Config.TimeToClaim          = {
-    hours = 0,                                      -- Hours to claim the reward
+    hours = 24,                                      -- Hours to claim the reward
     minutes = 0,                                    -- Minutes to claim the reward
-    seconds = 30,                                    -- Seconds to claim the reward
+    seconds = 0,                                    -- Seconds to claim the reward
 }
 Config.AnimationDuration    = 12                    -- Time in seconds to spin the roulette, more the items more time is reccomended
 Config.SellType             = "bank"                -- Type of reward to sell, cash or bank
