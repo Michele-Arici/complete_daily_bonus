@@ -10,7 +10,7 @@ Config.TimeToClaim          = {
 Config.AnimationDuration    = 12                    -- Time in seconds to spin the roulette, more the items more time is reccomended
 Config.SellType             = "bank"                -- Type of reward to sell, cash or bank
 Config.WeaponAmmo           = 100                   -- Ammo to give with the weapon
-Config.CarParkingSpawn      = "SanAndreasAvenue"    -- Garage to spawn the car (SanAndreasAvenue name not working with QBCorem, check your garage script config)
+Config.CarParkingSpawn      = "SanAndreasAvenue"    -- Garage to spawn the car (SanAndreasAvenue name not working with QBCore, check your garage script config)
 
 
 -- type: vehicle, item, cash, bank, weapon
