@@ -190,7 +190,6 @@ const app = Vue.createApp({
 
             var firstIds = [];
             var lastIds = [];
-            var carBool = false;
             for (let i = 0; i < data.length; i += itemsPerRow) {
                 const row = document.createElement("div");
                 row.classList.add("rowCard");
@@ -206,14 +205,6 @@ const app = Vue.createApp({
                         } else if (i == data.length - itemsPerRow * 2 && !lastIds.includes(item.id)) {
                             itemDiv.dataset.id = `${item.id}_last`;
                             lastIds.push(item.id);
-                        }
-                        if (i == data.length - itemsPerRow * 2 && !carBool) {
-                            var car = this.rouletteData[1];
-                            const carDiv = this.createItemCard(car);
-                            carDiv.dataset.id = `1_last`;
-                            lastIds.push(1)
-                            row.appendChild(carDiv);
-                            carBool = true;
                         }
                         row.appendChild(itemDiv);
                     }
@@ -241,8 +232,7 @@ const app = Vue.createApp({
             if (this.canClaim === false) { return; }
 
             // get a random item from lastIds
-            //const selectedItemId = this.lastIds[Math.floor(Math.random() * this.lastIds.length)];
-            const selectedItemId = 1;
+            const selectedItemId = this.lastIds[Math.floor(Math.random() * this.lastIds.length)];
             const selectedItem = this.rouletteData[selectedItemId];
 
             $.post("https://complete_daily_bonus/claim");
