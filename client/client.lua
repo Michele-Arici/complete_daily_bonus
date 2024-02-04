@@ -147,7 +147,6 @@ end)
 
 RegisterNUICallback('reward', function(data, cb)
     local reward = Config.RouletteData[data.id]
-    print(data.id, reward.type, reward.model)
     if reward.type == 'vehicle' then
         TriggerServerEvent('complete_daily_bonus:giveVehicle', reward.model)
     elseif reward.type == 'item' then
