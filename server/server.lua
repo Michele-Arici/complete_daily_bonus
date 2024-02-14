@@ -106,15 +106,15 @@ RegisterNetEvent("complete_daily_bonus:giveVehicle", function(vehicle)
 end)
 
 -- complete_daily_bonus:giveItem
-RegisterNetEvent("complete_daily_bonus:giveItem", function(item)
+RegisterNetEvent("complete_daily_bonus:giveItem", function(item, quantity)
     local _source = source
     
     if framework == 'esx' then
         local xPlayer = ESX.GetPlayerFromId(_source)
-        xPlayer.addInventoryItem(item, 1)
+        xPlayer.addInventoryItem(item, quantity)
     elseif framework == 'qbcore' then
         local xPlayer = QBCore.Functions.GetPlayer(_source)
-        xPlayer.Functions.AddItem(item, 1)
+        xPlayer.Functions.AddItem(item, quantity)
     end
 end)
 

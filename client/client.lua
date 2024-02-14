@@ -150,7 +150,7 @@ RegisterNUICallback('reward', function(data, cb)
     if reward.type == 'vehicle' then
         TriggerServerEvent('complete_daily_bonus:giveVehicle', reward.model)
     elseif reward.type == 'item' then
-        TriggerServerEvent('complete_daily_bonus:giveItem', reward.model)
+        TriggerServerEvent('complete_daily_bonus:giveItem', reward.model, reward.quantity)
     elseif reward.type == 'cash' then
         TriggerServerEvent('complete_daily_bonus:giveCash', reward.model)
     elseif reward.type == 'bank' then

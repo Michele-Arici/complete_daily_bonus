@@ -1,6 +1,6 @@
 Config = {}
 
--- === VERSION 1.0 ===
+Config.CheckScriptUpdates   = true                  -- Check for updates on github
 Config.OpenCommand          = 'daily-bonus'         -- Command to open the menu
 Config.TimeToClaim          = {
     hours = 24,                                      -- Hours to claim the reward
@@ -12,8 +12,8 @@ Config.SellType             = "bank"                -- Type of reward to sell, c
 Config.WeaponAmmo           = 100                   -- Ammo to give with the weapon
 Config.CarParkingSpawn      = "SanAndreasAvenue"    -- Garage to spawn the car (SanAndreasAvenue name not working with QBCore, check your garage script config)
 
-
 -- type: vehicle, item, cash, bank, weapon
+-- quantity: only for items, how many items to give
 Config.RouletteData = {
     [0] = {
         id = 0,
@@ -49,7 +49,8 @@ Config.RouletteData = {
         model = "fixkit",
         img = '/html/img/fix_kit.png',
         name = "Car Fix Kit",
-        sell = 500
+        sell = 500,
+        quantity = 1
     },
     [4] = {
         id = 4,
@@ -67,7 +68,8 @@ Config.RouletteData = {
         model = "bandage",
         img = '/html/img/bandage.png',
         name = "Bandage",
-        sell = 50
+        sell = 50,
+        quantity = 1
     },
     [6] = {
         id = 6,
@@ -76,7 +78,8 @@ Config.RouletteData = {
         model = "cola",
         img = '/html/img/cola.png',
         name = "Coca Cola",
-        sell = 50
+        sell = 50,
+        quantity = 1
     },
     [7] = {
         id = 7,
@@ -94,7 +97,8 @@ Config.RouletteData = {
         model = "medikit",
         img = '/html/img/medikit.png',
         name = "Medikit",
-        sell = 50
+        sell = 50,
+        quantity = 1
     },
     [9] = {
         id = 9,
@@ -121,7 +125,8 @@ Config.RouletteData = {
         model = "louisvuittonbag",
         img = '/html/img/louis_vuitton.webp',
         name = "Louis Vuitton Bag",
-        sell = 5000
+        sell = 5000,
+        quantity = 1
     },
     [12] = {
         id = 12,
@@ -130,7 +135,8 @@ Config.RouletteData = {
         model = "bodyarmor",
         img = '/html/img/armor.png',
         name = "Body Armor",
-        sell = 500
+        sell = 500,
+        quantity = 1
     },
     [13] = {
         id = 13,
@@ -139,7 +145,8 @@ Config.RouletteData = {
         model = "joint",
         img = '/html/img/joint.png',
         name = "Joint",
-        sell = 50
+        sell = 50,
+        quantity = 1
     },
     [14] = {
         id = 14,
@@ -148,7 +155,8 @@ Config.RouletteData = {
         model = "chips",
         img = '/html/img/chips.png',
         name = "Chips",
-        sell = 50
+        sell = 50,
+        quantity = 1
     },
 }
 

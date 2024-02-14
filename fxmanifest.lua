@@ -2,6 +2,10 @@ fx_version 'adamant'
 lua54 'on'
 game 'gta5'
 
+description 'Complete Daily Bonus | Attract players every day'
+author 'fanonx'
+version '1.0.1'
+
 ui_page 'html/main.html'
 
 files {
@@ -22,9 +26,6 @@ client_scripts{
 server_scripts{
     'config.lua',
     'server/server.lua',
+    'server/version.lua',
     '@mysql-async/lib/MySQL.lua',
-}
-
-escrow_ignore {
-    "config.lua",
 }
