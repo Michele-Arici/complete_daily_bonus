@@ -6,6 +6,7 @@ elseif framework == "qbcore" then
 end
 
 local uiOpen = false
+local uiInitialized = false
 local userData = {
     lastClaimed = 0,
     canClaim = false,
@@ -47,7 +48,6 @@ end
 local function initializeUi()
     local data = GetResourceKvpString('complete_daily_bonus')
     if data then loadData(json.decode(data)) end
-    
     Citizen.Wait(500)
     
     local rouletteData = Config.RouletteData
@@ -68,11 +68,12 @@ local function initializeUi()
         }
     )
 
+    uiInitialized = true
     Config.Notify(Config.Text['initialized'], 'success')
 end
 
 RegisterCommand(Config.OpenCommand, function()
-    if not uiOpen then
+    if not uiOpen and uiInitialized then
         SendNUIMessage(
             {
                 type = "dailyBonus",
@@ -84,15 +85,47 @@ RegisterCommand(Config.OpenCommand, function()
     end
 end)
 
-AddEventHandler('onClientResourceStart', function (resourceName)
-    if(GetCurrentResourceName() ~= resourceName) then return end
+if framework == "esx" then
+    Citizen.CreateThread(function()
+        while true do
+            if ESX.IsPlayerLoaded() then
+                initializeUi()
+                break
+            end
+            Citizen.Wait(200)
+        end
+    end)
+elseif framework == "qbcore" then
+    Citizen.CreateThread(function()
+        while true do
+            if LocalPlayer.state.isLoggedIn then
+                initializeUi()
+                break
+            end
+            Citizen.Wait(200)
+        end
+    end)
+else
+    AddEventHandler('onResourceStart', function (resourceName)
+        if(GetCurrentResourceName() ~= resourceName) then return end
+        Wait(500)
+    
+        while true do
+            if not uiInitialized then
+                initializeUi()
+                break
+            end
+            Citizen.Wait(200)
+        end
+    end)
+end
 
-    Wait(1000)
-
-    initializeUi()
-end)
 
 Citizen.CreateThread(function()
+    while not uiInitialized do
+        Citizen.Wait(500)
+    end
+
     while true do
         Citizen.Wait(1000)
 
@@ -173,4 +206,17 @@ RegisterNUICallback('close', function(data, cb)
     SetNuiFocus(false, false)
     uiOpen = false
     cb('ok')
+end)
+
+RegisterNetEvent('complete_daily_bonus:resetTimer')
+AddEventHandler('complete_daily_bonus:resetTimer', function()
+    userData.canClaim = true
+    SendNUIMessage({
+        type = "dailyBonus",
+        action = "setData",
+        data = 'canClaim',
+        value = true
+    })
+    saveData()
+    print('complete_daily_bonus: Timer has been reset')
 end)

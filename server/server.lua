@@ -157,3 +157,12 @@ RegisterNetEvent("complete_daily_bonus:giveWeapon", function(weapon)
     end
 end)
 
+RegisterCommand(Config.ResetTimerCommand, function(source, args, rawCommand)
+    if IsPlayerAceAllowed(source, "command.reset_daily_bonus") then
+        TriggerClientEvent('complete_daily_bonus:resetTimer', -1)
+        print("complete_daily_bonus: ^2Timer has been reset")
+    else
+        print("complete_daily_bonus: ^1You don't have permissions to reset the timer")
+    end
+end)
+

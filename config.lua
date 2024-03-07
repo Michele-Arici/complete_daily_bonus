@@ -2,6 +2,8 @@ Config = {}
 
 Config.CheckScriptUpdates   = true                  -- Check for updates on github
 Config.OpenCommand          = 'daily-bonus'         -- Command to open the menu
+Config.ResetTimerCommand    = 'reset-daily-bonus'   -- Command to reset the timer for all the players
+                                                    -- IMPORTANT: Add "add_ace group.admin command.reset_daily_bonus allow" in your server.cfg 
 Config.TimeToClaim          = {
     hours = 24,                                      -- Hours to claim the reward
     minutes = 0,                                    -- Minutes to claim the reward
