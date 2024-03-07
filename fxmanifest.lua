@@ -4,7 +4,7 @@ game 'gta5'
 
 description 'Complete Daily Bonus | Attract players every day'
 author 'fanonx'
-version '1.0.1'
+version '1.0.2'
 
 ui_page 'html/main.html'
 
